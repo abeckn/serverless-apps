@@ -1,0 +1,66 @@
+{
+    "Comment": "Parallelized Language Translation",
+    "StartAt": "ParallelTranslator",
+    "States": {
+        "ParallelTranslator": {
+            "Type": "Parallel",
+            "End": true,
+            "Branches": [
+                {
+                    "StartAt": "Italian",
+                    "States": {
+                        "Italian": {
+                            "Type": "Pass",
+                            "Result": {
+                                "TargetLanguageCode": "it",
+                                "VoiceId": "Carla"
+                            },
+                            "ResultPath": "$.TargetLanguage",
+                            "Next": "SpeechToTextItalian"
+                        },
+                        "SpeechToTextItalian": {"Type": "Task", "Resource": "arn:aws:lambda:[...]:function:speech2text", "Next": "TranslateToItalian"},
+                        "TranslateToItalian": {"Type": "Task", "Resource": "arn:aws:lambda:[...]:function:translate", "Next": "TextToSpeechItalian"},
+                        "TextToSpeechItalian": {"Type": "Task", "Resource": "arn:aws:lambda:[...]:function:tts", "End": true}
+
+                    }
+                },
+                {
+                    "StartAt": "French",
+                    "States": {
+                        "French": {
+                            "Type": "Pass",
+                            "Result": {
+                                "TargetLanguageCode": "fr",
+                                "VoiceId": "Celine"
+                            },
+                            "ResultPath": "$.TargetLanguage",
+                            "Next": "SpeechToTextFrench"
+                        },
+                        "SpeechToTextFrench": {"Type": "Task", "Resource": "arn:aws:lambda:[...]:function:speech2text", "Next": "TranslateToFrench"},
+                        "TranslateToFrench": {"Type": "Task", "Resource": "arn:aws:lambda:[...]:function:translate", "Next": "TextToSpeechFrench"},
+                        "TextToSpeechFrench": {"Type": "Task", "Resource": "arn:aws:lambda:[...]:function:tts", "End": true}
+
+                    }
+                },
+                {
+                    "StartAt": "German",
+                    "States": {
+                        "German": {
+                            "Type": "Pass",
+                            "Result": {
+                                "TargetLanguageCode": "de",
+                                "VoiceId": "Marlene"
+                            },
+                            "ResultPath": "$.TargetLanguage",
+                            "Next": "SpeechToTextGerman"
+                        },
+                        "SpeechToTextGerman": {"Type": "Task", "Resource": "arn:aws:lambda:[...]:function:speech2text", "Next": "TranslateToGerman"},
+                        "TranslateToGerman": {"Type": "Task", "Resource": "arn:aws:lambda:[...]:function:translate", "Next": "TextToSpeechGerman"},
+                        "TextToSpeechGerman": {"Type": "Task", "Resource": "arn:aws:lambda:[...]:function:tts", "End": true}
+                    }
+                }
+
+            ]
+        }
+    }
+}
