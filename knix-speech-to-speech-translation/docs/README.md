@@ -68,7 +68,7 @@ As you can see in the adapted ASL definition below (only the first branch is sho
 }
 ```
 
-Instead of copying and pasting the ASL definition into the KNIX workflow editor I also could have uploaded a file containing the workflow JSON or used the KNIX workflow import tool in the GUI. The workflow import tool lets KNIX users upload a zip file containing the workflow JSON as well as all function code and any function code dependencies. The zip file must adhere to the following directory structure:
+Instead of copying and pasting the ASL definition into the KNIX workflow editor I also could have uploaded a [file](https://github.com/abeckn/serverless-apps/raw/master/knix-speech-to-speech-translation/knix_speech_to_speech_translation.zip) containing the workflow JSON or used the KNIX workflow import tool in the GUI. The workflow import tool lets KNIX users upload a zip file containing the workflow JSON as well as all function code and any function code dependencies. The zip file must adhere to the following directory structure:
 
 ```ascii
  myWorkflow.json
